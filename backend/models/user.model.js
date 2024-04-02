@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+const { Schema } = mongoose;
 const userSchema = new mongoose.Schema(
 	{
 		fullName: {
@@ -22,11 +22,51 @@ const userSchema = new mongoose.Schema(
 			required: true,
 			minlength: 6,
 		},
+        year: {
+            type: Number,
+            required: true,
+        },
 		gender: {
 			type: String,
 			required: true,
 			enum: ["male", "female"],
 		},
+		fatherName: {
+			type: String,
+		},
+		motherName: {
+			type: String,
+		},
+		department: {
+			type: String,
+			required: true,
+		  },
+		  section: {
+			type: String,
+			required: true,
+		  },
+		  batch: {
+			type: String,
+		  },
+		  contactNumber: {
+			type: Number,
+		  },
+		  fatherContactNumber: {
+			type: Number,
+		  },
+		  dob: {
+			type: String,
+			required: true,
+		  },
+		  subjects: [
+			{
+			  type: Schema.Types.ObjectId,
+			  ref: "Subject",
+			},
+		  ],
+		
+
+
 		// createdAt, updatedAt => Member since <createdAt>
 	},
 	// { timestamps: true }

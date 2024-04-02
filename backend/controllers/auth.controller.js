@@ -28,7 +28,7 @@ export const login = async (req,res) =>{
 export const signup = async (req,res) =>{
     console.log("Connected to signup");
     try {
-        const { fullName, email, password, confirmPassword, gender } = req.body;
+        const { fullName, email, password, confirmPassword, gender, year , department , fatherName , dob, section } = req.body;
         console.log(password);
         console.log(confirmPassword);
         if (password !== confirmPassword) {
@@ -54,6 +54,11 @@ export const signup = async (req,res) =>{
             email,
             password:hashedPassword,
             gender,
+            year,
+            department,
+            fatherName,
+            dob,
+            section
             
         });
         if(newUser){
