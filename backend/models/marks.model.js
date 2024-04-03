@@ -2,37 +2,27 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const marksSchema = new Schema({
-  exam: {
+  student: {
     type: Schema.Types.ObjectId,
-    ref: "test",
+    ref: "User", 
+    required: true,
   },
-  email: { 
-    type: String, 
-    required: true, 
-    unique: true,
-    validate: {
-      validator: function(v) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-      },
-      message: props => `${props.value} is not a valid email address!`
-    }
+  subject: {
+    type: Schema.Types.ObjectId,
+    ref: "Subject", 
+    required: true,
   },
-  subject:{
-    type:Schema.Types.ObjectId,
-    ref:"subject"
+  test: {
+    type: Schema.Types.ObjectId,
+    ref: "Test", 
+    required: true,
   },
-
-  t1: {
+  totalMarks: {
     type: Number,
-    default: -1,
+    required: true,
   },
-  t2: {
-    type: Number,
-    default: -1,
-  },
-  endsem: {
-    type: Number,
-    default: -1,
-  },
-  
 });
+
+const Marks = mongoose.model("Marks", marksSchema);
+
+export default Marks;

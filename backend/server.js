@@ -3,6 +3,11 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 
 import subjectRoutes from "./routes/subject.routes.js";
+import testRoutes from "./routes/test.routes.js";
+import markRoutes from "./routes/marks.routes.js";
+
+
+
 import connectToMongo from "./db/connectToMongoDB.js";
 import cookieParser from "cookie-parser";
 
@@ -19,6 +24,8 @@ const PORT = process.env.PORT;
 
 app.use("/api/auth",authRoutes);
 app.use("/api/sub",subjectRoutes);
+app.use("/api/test",testRoutes);
+app.use("/api/mark",markRoutes);
 
 
 app.listen(5000,()=>{
