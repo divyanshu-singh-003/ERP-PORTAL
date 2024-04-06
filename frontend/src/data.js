@@ -29,14 +29,14 @@ export const menu = [
         },
         {
           id: 2,
-          title: "Products",
-          url: "/products",
+          title: "Marks",
+          url: "/marks",
           icon: "product.svg",
         },
         {
           id: 3,
-          title: "Orders",
-          url: "/orders",
+          title: "Attendance",
+          url: "/attendance",
           icon: "order.svg",
         },
         {
@@ -49,49 +49,32 @@ export const menu = [
     },
     {
       id: 3,
-      title: "general",
+      title: "Lost & Found",
       listItems: [
         {
           id: 1,
-          title: "Elements",
+          title: "Post",
           url: "/",
           icon: "element.svg",
         },
         {
           id: 2,
-          title: "Notes",
+          title: "Show All",
           url: "/",
           icon: "note.svg",
         },
-        {
-          id: 3,
-          title: "Forms",
-          url: "/",
-          icon: "form.svg",
-        },
-        {
-          id: 4,
-          title: "Calendar",
-          url: "/",
-          icon: "calendar.svg",
-        },
+        
       ],
     },
     {
       id: 4,
-      title: "Maintenance",
+      title: "Cab Sharing",
       listItems: [
         {
           id: 1,
-          title: "Settings",
+          title: "Available Cabs",
           url: "/",
           icon: "setting.svg",
-        },
-        {
-          id: 2,
-          title: "Backups",
-          url: "/",
-          icon: "backup.svg",
         },
       ],
     },

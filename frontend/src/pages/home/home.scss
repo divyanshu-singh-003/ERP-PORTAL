@@ -1,2 +1,55 @@
+@import "../../styles/variables.scss";
+
+
 .home {
+    border-radius: 10px;
+    border: 2px solid $soft-bg;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* To center horizontally */
+    justify-content: center; /* To center vertically */
+    
 }
+
+.intro {
+    height:100px;
+    
+    border-radius: 10px;
+    border: 2px solid $soft-bg;
+    width:100%;
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    font-size: 2.5rem; /* Increase font size */
+    font-family: 'Roboto', sans-serif; /* Change font family */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.bottom-box{
+    width:100%;
+    padding:40px;
+  display: grid;
+  height:500px;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  grid-auto-flow: dense;
+
+  .box {
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid $soft-bg;
+  }
+  
+
+}
+.time-image{
+    .icon{
+        height:300px;
+        width:500px
+    }
+}
+
+
+      
