@@ -12,18 +12,9 @@ const attendanceSchema = new Schema({
     ref: "Subject", 
     required: true,
   },
-  test: {
-    type: Schema.Types.ObjectId,
-    ref: "Test", 
-    required: true,
-  },
   totalAttendance: {
     type: Number,
     required: true,
-  },
-  totalClasses : {
-    type: Number,
-    required:true
   }
 });
 

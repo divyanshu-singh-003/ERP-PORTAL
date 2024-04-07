@@ -51,8 +51,8 @@ export const getMarks = async (req, res) => {
 
         const marks = await Marks.find({ student: userId, test: test._id }).populate('subject');
 
-        if (!marks || marks.length === 0) {
-            return res.status(404).json({ error: "Marks not found" });
+        if ( marks.length === 0) {
+            return res.status(404).json({ marks });
         }
 
         res.status(200).json({ marks });
