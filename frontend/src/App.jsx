@@ -43,6 +43,10 @@ function App() {
           <Route path='/' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<Home />}/>
           </Route>
+          <Route path='/users' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<Users />}/>
+          </Route>
+          
           <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
           </Routes>
           <Toaster />

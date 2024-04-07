@@ -91,3 +91,33 @@ export const logout = async (req,res) =>{
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 }
+
+export const getAllStudents = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Find the user based on the provided id
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const { department, section, batch } = user;
+
+        // Constructing the query based on department, section, and batch
+        const query = {
+            department,
+            section,
+            batch
+        };
+        const users = await User.find(query);
+
+
+        res.json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
