@@ -162,7 +162,7 @@ export const updateStudent = async (req, res) => {
       } = req.body;
       const updatedStudent = await User.findOne({ email });
       if (name) {
-        updatedStudent.name = name;
+        updatedStudent.fullName = name;
         await updatedStudent.save();
       }
       if (dob) {
@@ -210,4 +210,26 @@ export const updateStudent = async (req, res) => {
       res.status(500).json(error);
     }
   };
+
+
+
+export const updatePassword = async (req, res) => {
+  const { email, newPassword } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    user.password = newPassword;
+
+    await user.save();
+
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 

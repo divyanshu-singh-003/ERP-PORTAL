@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const updateStudent = () => {
+const updatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -8,7 +8,7 @@ const updateStudent = () => {
   const handleSubmit = async (formData) => {
     setIsLoading(true);
     try {
-      const res = await fetch("/api/auth/updatestudent" , {
+      const res = await fetch("/api/auth/updatepassword" , {
         method:"POST",
         headers: {
             "Content-Type" : "application/json"
@@ -27,4 +27,4 @@ const updateStudent = () => {
   return { handleSubmit, isLoading, error, isUpdated };
 };
 
-export default updateStudent;
+export default updatePassword;
