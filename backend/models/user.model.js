@@ -49,10 +49,10 @@ const userSchema = new mongoose.Schema(
 			type: String,
 		  },
 		  contactNumber: {
-			type: Number,
+			type:String,
 		  },
 		  fatherContactNumber: {
-			type: Number,
+			type: String,
 		  },
 		  dob: {
 			type: String,

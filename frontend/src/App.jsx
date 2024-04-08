@@ -12,7 +12,10 @@ import Footer from './components/footer/Footer';
 import Menu from './components/menu/Menu';
 import Marks from './pages/marks/Marks';
 import Attendance from './pages/attendance/Attendance';
+import Profile from './pages/profile/Profile';
+import UpdateBody from './pages/profile/updatebody/UpdateBody';
 import "./styles/global.scss"
+
 
 // const queryClient = new QueryClient();
 
@@ -53,6 +56,12 @@ function App() {
           </Route>
           <Route path='/attendance' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<Attendance />}/>
+          </Route>
+          <Route path='/profile' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<Profile />}/>
+          </Route>
+          <Route path='/updatestu' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<UpdateBody />}/>
           </Route>
           
           <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />

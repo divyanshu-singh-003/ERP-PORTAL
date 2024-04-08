@@ -28,7 +28,7 @@ export const login = async (req,res) =>{
 export const signup = async (req,res) =>{
     console.log("Connected to signup");
     try {
-        const { fullName, email, password, confirmPassword, gender, year , department , fatherName , dob, section } = req.body;
+        const { fullName, email, password, confirmPassword, gender, year , department , fatherName , dob, section , motherName , contactNumber } = req.body;
         console.log(password);
         console.log(confirmPassword);
         if (password !== confirmPassword) {
@@ -57,6 +57,8 @@ export const signup = async (req,res) =>{
             year,
             department,
             fatherName,
+            motherName,
+            contactNumber,
             dob,
             section
             
@@ -120,4 +122,92 @@ export const getAllStudents = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+export const getSingleStudent = async(req,res) =>{
+    try{
+        const { id } = req.params;
+    const user = await User.findById(id);
+
+    if(!user){
+        return res.status(404).json({error: 'User not found'});
+
+    }
+    res.status(200).json(user);
+    }
+
+    catch(e){
+        console.log(e);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+    
+
+}
+
+
+export const updateStudent = async (req, res) => {
+    try {
+      const {
+        name,
+        dob,
+        department,
+        contactNumber,
+        avatar,
+        email,
+        batch,
+        section,
+        year,
+        fatherName,
+        motherName,
+        fatherContactNumber,
+      } = req.body;
+      const updatedStudent = await User.findOne({ email });
+      if (name) {
+        updatedStudent.name = name;
+        await updatedStudent.save();
+      }
+      if (dob) {
+        updatedStudent.dob = dob;
+        await updatedStudent.save();
+      }
+      if (department) {
+        updatedStudent.department = department;
+        await updatedStudent.save();
+      }
+      if (contactNumber) {
+        updatedStudent.contactNumber = contactNumber;
+        await updatedStudent.save();
+      }
+      if (batch) {
+        updatedStudent.batch = batch;
+        await updatedStudent.save();
+      }
+      if (section) {
+        updatedStudent.section = section;
+        await updatedStudent.save();
+      }
+      if (year) {
+        updatedStudent.year = year;
+        await updatedStudent.save();
+      }
+      if (motherName) {
+        updatedStudent.motherName = motherName;
+        await updatedStudent.save();
+      }
+      if (fatherName) {
+        updatedStudent.fatherName = fatherName;
+        await updatedStudent.save();
+      }
+      if (fatherContactNumber) {
+        updatedStudent.fatherContactNumber = fatherContactNumber;
+        await updatedStudent.save();
+      }
+      if (avatar) {
+        updatedStudent.avatar = avatar;
+        await updatedStudent.save();
+      }
+      res.status(200).json(updatedStudent);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
 
