@@ -54,7 +54,7 @@ export const menu = [
         {
           id: 1,
           title: "Post",
-          url: "/",
+          url: "/postitem",
           icon: "element.svg",
         },
         {

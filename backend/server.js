@@ -6,7 +6,10 @@ import subjectRoutes from "./routes/subject.routes.js";
 import testRoutes from "./routes/test.routes.js";
 import markRoutes from "./routes/marks.routes.js";
 import attendanceRoutes from "./routes/attendance.routes.js";
-import lostandfoundRoutes from "./routes/lostitem.routes.js";
+import lfRoutes from "./routes/item.routes.js";
+
+
+
 
 
 
@@ -30,7 +33,9 @@ app.use("/api/sub",subjectRoutes);
 app.use("/api/test",testRoutes);
 app.use("/api/mark",markRoutes);
 app.use("/api/attendance",attendanceRoutes);
-app.use("/api/lost",lostandfoundRoutes);
+app.use("/api/lfitem",lfRoutes);
+
+
 
 
 

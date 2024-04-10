@@ -15,6 +15,7 @@ import Attendance from './pages/attendance/Attendance';
 import Profile from './pages/profile/Profile';
 import UpdateBody from './pages/profile/updatebody/UpdateBody';
 import PasswordChange from './pages/profile/passwordchange/PasswordChange';
+import PostImage from './pages/postitem/PostImage';
 import "./styles/global.scss"
 
 
@@ -66,6 +67,9 @@ function App() {
           </Route>
           <Route path='/password' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<PasswordChange />}/>
+          </Route>
+          <Route path='/postitem' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<PostImage />}/>
           </Route>
           
           <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
