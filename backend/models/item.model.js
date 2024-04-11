@@ -4,6 +4,11 @@ const { Schema } = mongoose;
 
 const itemSchema = new mongoose.Schema(
 	{
+
+        fullName:{
+            type:String,
+            
+        },
 		name:{
             type:String,
             required:true
@@ -23,6 +28,14 @@ const itemSchema = new mongoose.Schema(
         email:{
             type:String,
             required:true
+        },
+        foundBy:{
+            type:String,
+            default:"None"
+        },
+        emailBy:{
+            type:String,
+            default:"None"
         },
         image:[],
 

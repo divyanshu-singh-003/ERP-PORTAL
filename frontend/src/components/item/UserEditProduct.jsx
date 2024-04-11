@@ -16,9 +16,10 @@ const UserEditProduct = ({
 }) => {
     const {authUser} = useAuthContext();
 
-    const types=["Lost it","Found it"];
+    const types=["Lost","Found"];
     const [data,setData] =useState({
         ...itemdata,
+        fullName:itemdata?.fullName,
         name:itemdata?.name,
         description:itemdata?.description,
         question:itemdata?.question || [],

@@ -17,8 +17,9 @@ const UploadProduct = ({
 
     const {authUser} = useAuthContext();
 
-    const types=["Lost it","Found it"];
+    const types=["Lost","Found"];
     const [data,setData] =useState({
+        fullName:authUser.fullName,
         name:"",
         description:"",
         question:"",

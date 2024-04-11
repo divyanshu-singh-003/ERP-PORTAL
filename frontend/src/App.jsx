@@ -17,6 +17,11 @@ import UpdateBody from './pages/profile/updatebody/UpdateBody';
 import PasswordChange from './pages/profile/passwordchange/PasswordChange';
 import PostImage from './pages/postitem/PostImage';
 import "./styles/global.scss"
+import ShowAll from './pages/postitem/ShowAll';
+
+import ItemDetails from './components/item/ItemDetails';
+
+import CategoryItems from './components/item/CategoryItems';
 
 
 // const queryClient = new QueryClient();
@@ -70,6 +75,16 @@ function App() {
           </Route>
           <Route path='/postitem' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<PostImage />}/>
+          </Route>
+          <Route path='/item/:type' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<CategoryItems />}/>
+          </Route>
+          <Route path='/showall' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<ShowAll />}/>
+          </Route>
+
+          <Route path='/lfitem/:id' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<ItemDetails />}/>
           </Route>
           
           <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />

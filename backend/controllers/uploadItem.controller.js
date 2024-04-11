@@ -64,3 +64,116 @@ export const updateProductController = async(req,res) =>{
     }
 }
 
+
+export const getCategoryItem = async(req,res) =>{
+    try{
+        const product = await Item.distinct("type");
+        console.log("category" , product);
+
+
+        const productByCategory = []
+
+        for(const category of product){
+            const product = await Item.findOne({type:category })
+
+            if(product){
+                productByCategory.push(product)
+            }
+        }
+
+        res.json({
+            message : "category product",
+            data : productByCategory,
+            success : true,
+            error : false
+        })
+    }
+    catch(e){
+        res.status(400).json({
+            message:e.message || e,
+            error:true,
+            success:false
+        })
+    }
+}
+
+
+
+
+export const getCategoryWiseItem = async(req,res) =>{
+    try{
+        const { category } = req?.query;
+        const product = await Item.find({type:category});
+        res.json({
+            data:product,
+            message:"Product",
+            success:true,
+            error:false
+        })
+    }
+    catch(e){
+        res.status(400).json({
+            message:e.message || e,
+            error:true,
+            success:false
+        })
+    }
+}
+
+export const getItemDetailsById = async(req,res) =>{
+    try{
+        const { productId } = req.query;
+
+        const product = await Item.findById(productId);
+
+        res.status(200).json({
+            data:product,
+            message:"OK",
+            success:true,
+            error:false
+        })
+    }
+    catch(e){
+        res.status(400).json({
+            message:e.message || e,
+            error:true,
+            success:false
+        })
+    }
+}
+
+export const updateFoundItem = async(req,res) =>{
+    try{
+        const { _id , foundBy , emailBy ,email } = req.body;
+
+        
+
+        if(emailBy === email){
+         return  res.status(400).json({
+                message:"Same user cannot update",
+                success:false,
+                error:true
+            })
+        }
+        const product = await Item.findById(_id);
+        product.foundBy=foundBy;
+        product.emailBy=emailBy;
+        
+        await product.save();
+
+        res.json({
+            message:"Item Reported to Owner",
+            success:true,
+            error:false,
+            data:product
+        })
+    }
+    catch(e){
+        res.status(400).json({
+            message:e.message || e,
+            error:true,
+            success:false
+        })
+    }
+}
+
