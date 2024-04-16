@@ -144,7 +144,7 @@ export const getItemDetailsById = async(req,res) =>{
 
 export const updateFoundItem = async(req,res) =>{
     try{
-        const { _id , foundBy , emailBy ,email } = req.body;
+        const { _id , foundBy , emailBy ,email , answer } = req.body;
 
         
 
@@ -155,9 +155,17 @@ export const updateFoundItem = async(req,res) =>{
                 error:true
             })
         }
+        if(answer === ""){
+            return  res.status(400).json({
+                message:"No answer given",
+                success:false,
+                error:true
+            })
+        }
         const product = await Item.findById(_id);
         product.foundBy=foundBy;
         product.emailBy=emailBy;
+        product.answer=answer;
         
         await product.save();
 
@@ -177,3 +185,25 @@ export const updateFoundItem = async(req,res) =>{
     }
 }
 
+
+export const deleteUserProduct = async(req,res) =>{
+    try{
+
+        const { productId } = req.query;
+        const deletedProduct = await Item.findByIdAndDelete(productId);
+
+    res.json({
+        message:"Item Successfully deleted",
+        success:true,
+        error:false,
+        data:product
+    })
+    }
+    catch(e){
+        res.status(400).json({
+            message:e.message || e,
+            error:true,
+            success:false
+        })
+    }
+}

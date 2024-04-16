@@ -9,7 +9,7 @@ import {useParams} from "react-router-dom"
 
 import { useAuthContext } from '../../context/AuthContext';
 
-const ItemDetails = () => {
+const UserCardDetails = () => {
 
   const { authUser } = useAuthContext();
   const [data,setData] = useState({
@@ -22,11 +22,10 @@ const ItemDetails = () => {
         email:"",
         foundBy:"",
         emailBy:"",
+        answer:"",
   })
 
   const [loading,setLoading] = useState(true)
-
-  const [ans,setAns] = useState("");
 
   const params = useParams();
   const productImageListLoading = new Array(4).fill(null)
@@ -67,39 +66,6 @@ const ItemDetails = () => {
   }
 
 
-  const handleSubmit = async() =>{
-    console.log("data",data);
-
-    const response = await fetch("/api/lfitem/updatefound",{
-        method:"POST",
-        headers:{
-            "content-type":"application/json"
-        },
-        body: JSON.stringify({
-          _id:params.id,
-          foundBy:authUser.fullName,
-          emailBy:authUser.email,
-          email:data.email,
-          answer:ans
-        })
-    })
-
-    const responseData = await response.json();
-
-    if(responseData.success){
-        toast.success(responseData?.message)
-    }
-
-
-    if(responseData.error){
-        toast.error(responseData?.message);
-    }
-  }
-  const handleChange = (event) => {
-    setAns(event.target.value); // Update the ans state with the new value
-  };
-
-  
 
   return (
     <div className="container mx-auto p-4 bg-white text-black">
@@ -159,32 +125,21 @@ const ItemDetails = () => {
             <p>{data?.question}</p>
           </div>
           <div>
-            <p className="text-slate-600 font-medium my-1">Lost By:</p>
-            <p>{data?.fullName}</p>
+          <h1 className={`text-ellipsis line-clamp-2  ${data.foundBy === 'None' ? 'text-red-500' : 'text-green-500'}`}>
+                  Status: {data.foundBy} {data.emailBy !== 'None' && `(${data.emailBy})`}
+           </h1>
           </div>
           <div>
-            <p className="text-slate-600 font-medium my-1">Email:</p>
-            <p>{data?.email}</p>
+          {data.answer === "" ? (
+            <h1 className="text-red-500">Answer: None</h1>
+          ) : 
+          (
+          <h1 className="text-green-500">Answer: {data.answer}</h1>
+          )}
           </div>
-          <div className="text-black">
-          <label htmlFor="name">Answer</label>
-            <input 
-              type='text' 
-              id='name' 
-              placeholder={ 'Enter answer to question' } 
-              name='name'
-              value={ans} 
-              onChange={handleChange}
-              className='p-1 ml-2 bg-slate-100 border rounded'
-              required
-            />
-            </div>
+          
 
-          <div className='flex items-center gap-3 my-2'>
-                  <button className='border-2 border-red-600 rounded px-3 py-1 min-w-[120px] text-red-600 font-medium hover:bg-red-600 hover:text-white' onClick={handleSubmit}>
-                    {data.type === 'Lost' ? 'Found Item' : (data.type === 'Found' ? 'Lost Item' : 'Found Item')}
-                  </button>
-          </div>
+          
     
         </div>
       </div>
@@ -192,4 +147,4 @@ const ItemDetails = () => {
   )
 }
 
-export default ItemDetails
+export default UserCardDetails

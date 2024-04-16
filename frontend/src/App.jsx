@@ -23,6 +23,8 @@ import ItemDetails from './components/item/ItemDetails';
 
 import CategoryItems from './components/item/CategoryItems';
 
+import UserCardDetails from './components/item/UserCardDetails';
+
 
 // const queryClient = new QueryClient();
 
@@ -86,6 +88,10 @@ function App() {
           <Route path='/lfitem/:id' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<ItemDetails />}/>
           </Route>
+          <Route path='/useritem/:id' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<UserCardDetails />}/>
+          </Route>
+          
           
           <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
           </Routes>

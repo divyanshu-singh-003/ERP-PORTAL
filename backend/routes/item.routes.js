@@ -1,7 +1,7 @@
 import express from "express";
 import { protectRoute } from "../middleware/protectRoute.js";
 
-import { UploadItemController ,getProductController ,updateProductController ,getCategoryItem ,getCategoryWiseItem , getItemDetailsById ,updateFoundItem} from "../controllers/uploadItem.controller.js";
+import { UploadItemController ,getProductController ,updateProductController ,getCategoryItem ,getCategoryWiseItem , getItemDetailsById ,updateFoundItem , deleteUserProduct} from "../controllers/uploadItem.controller.js";
 
 const router=express.Router();
 
@@ -20,6 +20,8 @@ router.get("/getitem",getItemDetailsById);
 
 
 router.post("/updatefound",updateFoundItem);
+
+router.delete("/getlfitem", deleteUserProduct);
 
 export default router;
 

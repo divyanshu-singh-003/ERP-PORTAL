@@ -37,6 +37,10 @@ const itemSchema = new mongoose.Schema(
             type:String,
             default:"None"
         },
+        answer:{
+            type:String,
+            default:"",
+        },
         image:[],
 
 		// createdAt, updatedAt => Member since <createdAt>

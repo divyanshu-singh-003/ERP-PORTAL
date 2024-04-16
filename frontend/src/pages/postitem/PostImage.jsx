@@ -4,6 +4,7 @@ import { useState,useEffect } from 'react';
 import UploadProduct from '../../components/item/UploadProduct'
 import { useAuthContext } from '../../context/AuthContext';
 import UserCard from '../../components/item/UserCard';
+import toast from "react-hot-toast"
 
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +26,21 @@ const PostImage = () => {
     const dataResponse=await response.json();
 
     setAllProduct(dataResponse?.data || []);
+
+  }
+
+  const deleteProduct = async(productId) =>{
+
+
+    
+      const res = await fetch(`/api/lfitem/getlfitem?productId=${productId}`,{
+        method:"delete",
+      });
+
+      console.log(res);
+      toast.success("Item deleted successfully");
+      fetchAllProduct();
+    
   }
 
   const onClickLost = () =>{
@@ -50,9 +66,10 @@ const PostImage = () => {
       
       <div className='flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-180px)] overflow-y-scroll'>
           {
+            
             allProduct.map((product,index)=>{
               return(
-                <UserCard data={product} key={index+"All items"} fetchData={fetchAllProduct}/>
+                <UserCard data={product} key={index+"All items"} fetchData={fetchAllProduct} deleteProduct={deleteProduct}/>
                 
               )
             })
