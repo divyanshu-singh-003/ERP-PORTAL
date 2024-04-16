@@ -25,6 +25,8 @@ import CategoryItems from './components/item/CategoryItems';
 
 import UserCardDetails from './components/item/UserCardDetails';
 
+import CabSharing from './pages/cabs/CabSharing';
+
 
 // const queryClient = new QueryClient();
 
@@ -91,6 +93,11 @@ function App() {
           <Route path='/useritem/:id' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<UserCardDetails />}/>
           </Route>
+          <Route path='/cabs' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<CabSharing/>}/>
+          </Route>
+
+
           
           
           <Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />

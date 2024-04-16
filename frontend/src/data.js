@@ -73,7 +73,7 @@ export const menu = [
         {
           id: 1,
           title: "Available Cabs",
-          url: "/",
+          url: "/cabs",
           icon: "setting.svg",
         },
       ],
