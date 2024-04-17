@@ -68,6 +68,9 @@ const Login = () => {
 						/>
 					</div>
 					
+					<Link to='/admin' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
+						Are you Admin ?
+					</Link>
 
 					<div>
 						<button className='btn btn-block btn-sm mt-8' disabled={loading}>

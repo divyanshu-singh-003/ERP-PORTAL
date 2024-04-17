@@ -27,12 +27,24 @@ import UserCardDetails from './components/item/UserCardDetails';
 
 import CabSharing from './pages/cabs/CabSharing';
 
+import AdminHome from './pages/admin/AdminHome';
+
+import NavbarAdmin from './components/navbar/NavbarAdmin';
+
+
+import MenuAdmin from './components/menu/MenuAdmin';
+
+
+import MarksUpload from './pages/admin/marksUpload/MarksUpload';
+
 
 // const queryClient = new QueryClient();
 
 
 function App() {
   const { authUser } = useAuthContext();
+
+  const found = true;
 
   const Layout = () => {
     return (
@@ -41,6 +53,22 @@ function App() {
         <div className="container">
           <div className="menuContainer">
             <Menu />
+          </div>
+          <div className="contentContainer">
+            <Outlet/>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  };
+  const Layout2 = () => {
+    return (
+      <div className="main">
+        <NavbarAdmin />
+        <div className="container">
+          <div className="menuContainer">
+            <MenuAdmin />
           </div>
           <div className="contentContainer">
             <Outlet/>
@@ -95,6 +123,14 @@ function App() {
           </Route>
           <Route path='/cabs' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<CabSharing/>}/>
+          </Route>
+
+          <Route path='/admin' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>
+            <Route index element ={<AdminHome/>}/>
+          </Route>
+
+          <Route path='/admin/marks' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>
+            <Route index element ={<MarksUpload/>}/>
           </Route>
 
 

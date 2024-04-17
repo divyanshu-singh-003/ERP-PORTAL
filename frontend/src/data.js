@@ -149,4 +149,80 @@ export const menu = [
       amount: "1.560",
     },
   ];
+
+
+  export const menu2 = [
+    {
+      id: 1,
+      title: "main",
+      listItems: [
+        {
+          id: 1,
+          title: "Admin Homepage",
+          url: "/admin",
+          icon: "home.svg",
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "lists",
+      listItems: [
+        {
+          id: 1,
+          title: "Upload Marks",
+          url: "/admin/marks",
+          icon: "user.svg",
+        },
+        {
+          id: 2,
+          title: "Upload Attendance",
+          url: "/admin/attendance",
+          icon: "product.svg",
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Lost & Found",
+      listItems: [
+        {
+          id: 1,
+          title: "Upload Student",
+          url: "/admin/student",
+          icon: "element.svg",
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "analytics",
+      listItems: [
+        {
+          id: 1,
+          title: "Charts",
+          url: "/",
+          icon: "chart.svg",
+        },
+        {
+          id: 2,
+          title: "Logs",
+          url: "/",
+          icon: "log.svg",
+        },
+      ],
+    },
+    {
+      id: 4,
+      title: "Cab Sharing",
+      listItems: [
+        {
+          id: 1,
+          title: "Available Cabs",
+          url: "/cabs",
+          icon: "setting.svg",
+        },
+      ],
+    },
+  ];
   

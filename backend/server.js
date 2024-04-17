@@ -8,6 +8,7 @@ import markRoutes from "./routes/marks.routes.js";
 import attendanceRoutes from "./routes/attendance.routes.js";
 import lfRoutes from "./routes/item.routes.js";
 import cabRoutes from "./routes/cab.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 
 
 
@@ -36,6 +37,7 @@ app.use("/api/mark",markRoutes);
 app.use("/api/attendance",attendanceRoutes);
 app.use("/api/lfitem",lfRoutes);
 app.use("/api/cabs",cabRoutes);
+app.use("/api/admin",adminRoutes);
 
 
 
