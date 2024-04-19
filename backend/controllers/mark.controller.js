@@ -120,8 +120,10 @@ export const getMarks2 = async (req, res) => {
       marksData[subject.subjectCode]["TotalMarksAvailable"] = totalMarksAvailable;
       marksData[subject.subjectCode]["Percentage"] = percentage.toFixed(2);
     });
+        // Convert object to array of objects, then reverse the array, and finally convert it back to an object
+        const reversedMarksData = Object.fromEntries(Object.entries(marksData).reverse());
 
-    res.status(200).json({ marks: marksData });
+    res.status(200).json({ marks: reversedMarksData });
   } catch (error) {
     res.status(400).json({
       message: e.message || e,

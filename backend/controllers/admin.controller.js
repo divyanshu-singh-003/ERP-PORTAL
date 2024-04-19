@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import Marks from "../models/marks.model.js";
 import Test from "../models/test.model.js";
 import Subject from "../models/subject.model.js";
+import Attendance from "../models/attendance.model.js"
 
 
 export const getStudentsAdmin = async(req,res) =>{
@@ -81,3 +82,50 @@ export const putMarksAdmin = async(req,res) =>{
    
 
 }
+
+
+export const putAdminAttendance = async(req,res) =>{
+    try {
+        const { userName, email, subjectCode,  totalAttendance , totalClasses } = req.body;
+    
+        const user = await User.findOne({ fullName: userName, email });
+        if (!user) {
+          return res.status(404).json({ error: "User not found" });
+        }
+    
+        const subject = await Subject.findOne({ subjectCode });
+        if (!subject) {
+          return res.status(404).json({ error: "Subject not found" });
+        }
+        subject.totalLectures=totalClasses;
+        await subject.save();
+        const att=await Attendance.findOne({student:user._id,subject:subject._id});
+        if(att){
+        att.totalAttendance = totalAttendance;
+        await att.save();
+        }
+    else{
+        att = new Attendance({
+            student: user._id,
+            subject: subject._id,
+            totalAttendance,
+    
+          });
+          await att.save();
+    }
+
+    
+    res.json({
+        message: "Attendance marked successfully",
+        success: true,
+        error: false,
+        data: att
+      });
+      } catch (e) {
+        res.status(400).json({
+            message:e.message || e,
+            error:true,
+            success:false
+        })
+      }
+    };

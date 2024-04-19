@@ -37,6 +37,12 @@ import MenuAdmin from './components/menu/MenuAdmin';
 
 import MarksUpload from './pages/admin/marksUpload/MarksUpload';
 
+import MarksCSV from './pages/admin/marksUpload/MarksCSV';
+
+import AdminAttendanceCSV from './pages/admin/attendance/AdminAttendanceCSV';
+
+import UploadStudent from './pages/admin/student/UploadStudent';
+
 
 // const queryClient = new QueryClient();
 
@@ -132,7 +138,15 @@ function App() {
           <Route path='/admin/marks' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>
             <Route index element ={<MarksUpload/>}/>
           </Route>
-
+          <Route path='/admin/markscsv' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>
+            <Route index element ={<MarksCSV/>}/>
+          </Route>
+          <Route path='/admin/attendance' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>
+            <Route index element ={<AdminAttendanceCSV/>}/>
+          </Route>
+          <Route path='/admin/uploadstudent' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>
+            <Route index element ={<UploadStudent/>}/>
+          </Route>
 
           
           

@@ -176,8 +176,8 @@ export const menu = [
         },
         {
           id: 2,
-          title: "Upload Attendance",
-          url: "/admin/attendance",
+          title: "Upload Marks CSV",
+          url: "/admin/markscsv",
           icon: "product.svg",
         }
       ]
@@ -188,20 +188,20 @@ export const menu = [
       listItems: [
         {
           id: 1,
-          title: "Upload Student",
-          url: "/admin/student",
+          title: "Upload Attendance CSV",
+          url: "/admin/attendance",
           icon: "element.svg",
         }
       ]
     },
     {
       id: 5,
-      title: "analytics",
+      title: "Upload Student",
       listItems: [
         {
           id: 1,
-          title: "Charts",
-          url: "/",
+          title: "Upload Student",
+          url: "/admin/uploadstudent",
           icon: "chart.svg",
         },
         {

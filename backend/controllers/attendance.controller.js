@@ -54,7 +54,52 @@ export const putAttendance = async(req,res) =>{
       }
   };
   
-
+  export const getUserAttendanceSummary = async (req, res) => {
+    try {
+      const userId = req.query.userId; 
+  
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+  
+      const subjects = await Subject.find({ _id: { $in: user.subjects } });
+  
+      const attendanceSummary = [];
+  
+      for (const subject of subjects) {
+        const attendance = await Attendance.findOne({
+          student: userId,
+          subject: subject._id
+        });
+  
+        const percentageAttended = attendance
+          ? (attendance.totalAttendance / subject.totalLectures) * 100
+          : 0;
+  
+        attendanceSummary.push({
+          subjectCode: subject.subjectCode,
+          subjectName: subject.subjectName,
+          totalAttended: attendance ? attendance.totalAttendance : "-",
+          totalLectures: subject.totalLectures,
+          percentageAttended: percentageAttended.toFixed(2),
+        });
+      }
+      attendanceSummary.reverse();
+      res.json({
+        success: true,
+        error:false,
+        data: attendanceSummary
+      });
+    } catch (error) {
+      res.status(400).json({
+        message: error.message || error,
+        error: true,
+        success: false
+      });
+    }
+  };
+  
     
 
 

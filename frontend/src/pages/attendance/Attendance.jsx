@@ -1,10 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import Spinner from '../../../utils/Spinner';
-import useAttendance from '../../hooks/getAttendanceHook';
+import { useAuthContext } from '../../context/AuthContext';
+import toast from "react-hot-toast";
 
 const Attendance = () => {
-    const { subjectAttendance, loading } = useAttendance();
+    const [loading, setLoading] = useState(false);
+    const { authUser } = useAuthContext();
+    const [attendance, setAttendance] = useState([]); // Changed variable name from subjectAttendance to attendance
+    const fetchAttendance = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch(`/api/attendance/userattendance?userId=${authUser._id}`, {
+                method: "GET"
+            });
+            const responseData = await response.json();
+
+            if (responseData.error) {
+                toast.error(responseData.message);
+            } else {
+                setAttendance(responseData.data); // Updated variable name from subjectAttendance to attendance
+            }
+        } catch (e) {
+            console.error("Error fetching attendance:", e);
+            toast.error("Error fetching attendance. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        fetchAttendance();
+    }, []);
 
     return (
         <div className="flex-[0.8] mt-3">
@@ -46,33 +72,30 @@ const Attendance = () => {
                                 <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
                                     Percentage
                                 </h1>
-                                </div>
+                            </div>
                             {
-                                subjectAttendance && 
-                                Object.keys(subjectAttendance).map((subjectCode,idx)=> (
-                                    <div key={idx}
-                                    className="grid grid-cols-12">
+                                attendance && 
+                                attendance.map((subject, idx) => (
+                                    <div key={idx} className="grid grid-cols-12">
                                         <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
-                                    {idx+1}
-                                </h1>
-                                <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
-                                    {subjectCode}
-                                </h1>
-                                <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
-                                {subjectAttendance[subjectCode].SubjectName}
-                                </h1>
-                                <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
-                                {subjectAttendance[subjectCode].totalAttended}
-                                </h1>
-                                <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
-                                {subjectAttendance[subjectCode].totalClasses}
-                                </h1>
-                                <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
-                                {subjectAttendance[subjectCode].percentage}
-                                </h1>                                
-
+                                            {idx + 1}
+                                        </h1>
+                                        <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
+                                            {subject.subjectCode}
+                                        </h1>
+                                        <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
+                                            {subject.subjectName}
+                                        </h1>
+                                        <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
+                                            {subject.totalAttended}
+                                        </h1>
+                                        <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
+                                            {subject.totalLectures}
+                                        </h1>
+                                        <h1 className="font-bold py-2 px-2 col-span-2 text-black flex justify-center items-center">
+                                            {subject.percentageAttended}
+                                        </h1>
                                     </div>
-
                                 ))
                             }
                         </div>

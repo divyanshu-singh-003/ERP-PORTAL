@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import generateTokenAndSetCookie from "../utils/generateTokens.js";
 import bcrypt from "bcryptjs";
+import Subject from "../models/subject.model.js";
 
 export const login = async (req,res) =>{
     try {
@@ -36,64 +37,65 @@ export const login = async (req,res) =>{
 	}
 }
 
-export const signup = async (req,res) =>{
-    console.log("Connected to signup");
-    try {
-        const { fullName, email, password, confirmPassword, gender, year , department , fatherName , dob, section , motherName , contactNumber } = req.body;
-        console.log(password);
-        console.log(confirmPassword);
-        if (password !== confirmPassword) {
-            return res.status(400).json({ error: "Passwords don't match" });
-        }
+export const signup = async (req, res) => {
+  console.log("Connected to signup");
+  try {
+      const { fullName, email, password, confirmPassword, gender, year, department, fatherName, dob, section, motherName, contactNumber , fatherContactNumber} = req.body;
+      console.log(password);
+      console.log(confirmPassword);
+      if (password !== confirmPassword) {
+          return res.status(400).json({ error: "Passwords don't match" });
+      }
 
-        const user = await User.findOne({ email });
+      const user = await User.findOne({ email });
 
-        if (user) {
-            return res.status(400).json({ error: "Username already exists" });
-        }
-        //HASH PASSWORD HERE
+      if (user) {
+          return res.status(400).json({ error: "Username already exists" });
+      }
+      // HASH PASSWORD HERE
 
-        const salt = await bcrypt.genSalt(10);
-		const hashedPassword = await bcrypt.hash(password, salt);
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
-        
+      const subjects = await Subject.find({ department, year });
 
-        
+      const subjectIds = subjects.map(subject => subject._id);
 
-        const newUser = new User({
-            fullName,
-            email,
-            password:hashedPassword,
-            gender,
-            year,
-            department,
-            fatherName,
-            motherName,
-            contactNumber,
-            dob,
-            section
-            
-        });
-        if(newUser){
-            generateTokenAndSetCookie(newUser._id,res);
-            await newUser.save();
+      const newUser = new User({
+          fullName,
+          email,
+          password: hashedPassword,
+          gender,
+          year,
+          department,
+          fatherName,
+          motherName,
+          contactNumber,
+          dob,
+          section,
+          fatherContactNumber,
+          subjects: subjectIds
+      });
 
-        res.status(201).json({
-            _id: newUser._id,
-            fullName: newUser.fullName,
-            email: newUser.email,
-            
-        });
-        }
-        else{
-            res.status(400).json({error:"Invalid User data"});
-        }
-        
-    } catch (error) {
-        console.error("Error in signup ", error.message);
-        res.status(500).json({ error: "Internal server Error" });
-    }
+      if (newUser) {
+          generateTokenAndSetCookie(newUser._id, res);
+          await newUser.save();
+
+          res.status(201).json({
+              _id: newUser._id,
+              fullName: newUser.fullName,
+              email: newUser.email,
+          });
+      } else {
+          res.status(400).json({ error: "Invalid User data" });
+      }
+
+  } catch (error) {
+      console.error("Error in signup ", error.message);
+      res.status(500).json({ error: "Internal server Error" });
+  }
 }
+
 
 export const logout = async (req,res) =>{
     try {
