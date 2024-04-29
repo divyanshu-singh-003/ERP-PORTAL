@@ -38,7 +38,7 @@ const UploadStudent = () => {
     );
 
     if (validStudents.length === 0) {
-        toast.error("No valid data found for upload.");
+        console.log("No valid data found for upload.");
         return;
     }
 

@@ -5,14 +5,19 @@ import ShowNotice from '../../components/notices/ShowNotice';
 import exampleNotices from '../../notices';
 import ReplyIcon from "@mui/icons-material/Reply";
 
+import { useAuthContext } from "../../context/AuthContext";
 
 import "./home.scss";
 const Home = () => {
   const [open, setOpen] = useState(false);
   const [openNotice, setOpenNotice] = useState({});
+  const { authUser } = useAuthContext();
+
+
+
   return (
     <div className="home">
-      <div className="intro"><h1>Welcome to ERP PORTAL Jane</h1></div>
+      <div className="intro"><h1>Welcome to ERP PORTAL {authUser.fullName}</h1></div>
       <div className="bottom-box">
         <div className="box time-table">
         <div className="h-full w-full rounded-xl shadow-lg flex flex-col pt-3 ">
