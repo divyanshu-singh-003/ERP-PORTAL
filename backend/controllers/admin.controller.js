@@ -99,7 +99,7 @@ export const putAdminAttendance = async(req,res) =>{
         }
         subject.totalLectures=totalClasses;
         await subject.save();
-        const att=await Attendance.findOne({student:user._id,subject:subject._id});
+        let att=await Attendance.findOne({student:user._id,subject:subject._id});
         if(att){
         att.totalAttendance = totalAttendance;
         await att.save();
@@ -122,6 +122,7 @@ export const putAdminAttendance = async(req,res) =>{
         data: att
       });
       } catch (e) {
+        console.log(e.message);
         res.status(400).json({
             message:e.message || e,
             error:true,
