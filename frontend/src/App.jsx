@@ -43,6 +43,7 @@ import AdminAttendanceCSV from './pages/admin/attendance/AdminAttendanceCSV';
 
 import UploadStudent from './pages/admin/student/UploadStudent';
 
+import Complaint from './pages/complaints/Complaint';
 
 // const queryClient = new QueryClient();
 
@@ -129,6 +130,10 @@ function App() {
           </Route>
           <Route path='/cabs' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
             <Route index element ={<CabSharing/>}/>
+          </Route>
+
+          <Route path='/complaints' element={authUser ? <Layout /> : <Navigate to={"/login"} />}>
+            <Route index element ={<Complaint/>}/>
           </Route>
 
           <Route path='/admin' element={ found ? <Layout2 /> : <Navigate to={"/login"} />}>

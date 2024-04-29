@@ -80,12 +80,12 @@ export const menu = [
     },
     {
       id: 5,
-      title: "analytics",
+      title: "other",
       listItems: [
         {
           id: 1,
-          title: "Charts",
-          url: "/",
+          title: "Complaints",
+          url: "/complaints",
           icon: "chart.svg",
         },
         {
