@@ -26,6 +26,7 @@ const columns = [
     { field: 'year', headerName: 'Year', width: 120 },
     { field: 'department', headerName: 'Department', width: 150 },
     { field: 'dob', headerName: 'Date of Birth', width: 150 },
+    { field: 'contactNumber', headerName: 'Contact Details', width: 150 },
   ];
   
 
