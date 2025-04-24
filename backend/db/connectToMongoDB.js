@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectToMongoDB = async () => {
 	try {
-		await mongoose.connect(process.env.MONGO_DB_URI);
+		await mongoose.connect("mongodb+srv://user002:Namrataa1@cluster0.jtosevj.mongodb.net/erp-portal-db?retryWrites=true&w=majority&appName=Cluster0");
 		console.log("Connected to MongoDB");
 	} catch (error) {
 		console.log("Error connecting to MongoDB", error.message);

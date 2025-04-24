@@ -39,12 +39,7 @@ export const menu = [
           url: "/attendance",
           icon: "order.svg",
         },
-        {
-          id: 4,
-          title: "Posts",
-          url: "/posts",
-          icon: "post2.svg",
-        },
+        
       ],
     },
     {
